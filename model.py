@@ -2,7 +2,7 @@ import torch
 from torch import nn
 import torch.cuda as cuda
 from EncoderDecoder import Encoder, Encoder2, Decoder
-from Module import Attn
+from module import Attn
 
 # Hyper Parameters
 
