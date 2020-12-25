@@ -1,7 +1,7 @@
 import torch
 from torch import nn
 import torch.cuda as cuda
-from Module import ScaledDotProductAttention, MultiHeadAttention, PositionalWiseFeedForward
+from module import ScaledDotProductAttention, MultiHeadAttention, PositionalWiseFeedForward
 
 # Hyper Parameters
 TIME_STEP = 12
