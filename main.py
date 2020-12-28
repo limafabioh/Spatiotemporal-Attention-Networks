@@ -1,3 +1,5 @@
+# main.py
+
 import torch
 from torch import nn
 import numpy as np
@@ -10,7 +12,7 @@ from model import Model
 
 # Hyper Parameters
 BATCH = 300
-EPOCHS = 40
+EPOCHS = 5
 INPUT_SIZE = 6
 LR = 0.01
 d_model = 512
@@ -20,11 +22,13 @@ h_state = None
 TIME_STEP = 12
 STEPS = 1
 DEVICE = torch.device('cuda' if cuda.is_available() else 'cpu')
+print(DEVICE)
 
 
 def generator(seq):
     size = 16030
     seq = np.array(seq)
+    #print(seq)
     data = []
     for i in range(size - 30):
         data.append(np.reshape(seq[i:i + TIME_STEP + 24, 3], newshape=[1, -1]))
@@ -53,7 +57,7 @@ class DealDateset(Dataset):
 
 
 def prepare_data(path):
-    table = pd.read_csv(path, sep=",", header=None, skiprows=1)
+    table = pd.read_csv(path, sep=";", header=None, skiprows=1)
     data = generator(table)
     data = data / 1200
     train_data = data[0:10000]
@@ -61,12 +65,12 @@ def prepare_data(path):
     return train_data, test_data
 
 
-train_data, test_data = prepare_data(path="/home/owen/SITE_00193.CSV")
-train_dataA, test_dataA = prepare_data(path="/home/owen/SITE_00173.CSV")
-train_dataB, test_dataB = prepare_data(path="/home/owen/SITE_00215.CSV")
-train_dataC, test_dataC = prepare_data(path="/home/owen/SITE_00365.CSV")
-train_dataD, test_dataD = prepare_data(path="/home/owen/SITE_00446.CSV")
-train_dataE, test_dataE = prepare_data(path="/home/owen/SITE_00797.CSV")
+train_data, test_data = prepare_data(path="usinas1.csv")
+train_dataA, test_dataA = prepare_data(path="usinas1.csv")
+train_dataB, test_dataB = prepare_data(path="usinas1.csv")
+train_dataC, test_dataC = prepare_data(path="usinas1.csv")
+train_dataD, test_dataD = prepare_data(path="usinas1.csv")
+train_dataE, test_dataE = prepare_data(path="usinas1.csv")
 
 x1 = torch.from_numpy(np.reshape(test_data[:, 0:TIME_STEP], newshape=(-1, TIME_STEP, 1)))
 x2 = torch.from_numpy(np.reshape(test_dataA[:, 0:TIME_STEP], newshape=(-1, TIME_STEP, 1)))
