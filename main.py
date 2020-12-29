@@ -9,9 +9,10 @@ import torch.optim.lr_scheduler as lr_scheduler
 from torch import optim
 from torch.utils.data import DataLoader, Dataset
 from model import Model
+from timeit import default_timer as timer
 
 # Hyper Parameters
-BATCH = 300
+BATCH = 200
 EPOCHS = 5
 INPUT_SIZE = 6
 LR = 0.01
@@ -22,8 +23,9 @@ h_state = None
 TIME_STEP = 12
 STEPS = 1
 DEVICE = torch.device('cuda' if cuda.is_available() else 'cpu')
+#DEVICE = torch.device("cpu")
 print(DEVICE)
-
+start=timer()
 
 def generator(seq):
     size = 16030
@@ -110,3 +112,4 @@ for step in range(EPOCHS):
     print('Epoch:%3d' % (step + 1),
           '| Train RMSE: %.5f' % rmse_train,
           '| Test RMSE : %.5f' % rmse_test)
+    print(timer() - start)
