@@ -6,8 +6,8 @@ from module import Attn
 
 # Hyper Parameters
 
-BATCH = 300
-EPOCHS = 40
+#BATCH = 300
+#EPOCHS = 40
 INPUT_SIZE = 6
 LR = 0.01
 d_model = 512
